@@ -41,10 +41,16 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ formData, template = "mod
         {/* Header */}
         <div className={styles.headerClass}>
           <h1 className={styles.nameClass}>{formData.fullName || "Your Name"}</h1>
-          <div className="mt-2 space-x-4 text-sm">
-            {formData.email && <span>{formData.email}</span>}
-            {formData.phone && <span>• {formData.phone}</span>}
-            {formData.location && <span>• {formData.location}</span>}
+          <div className="mt-2 space-y-2">
+            <div className="flex flex-wrap gap-4 text-sm">
+              {formData.email && <span>{formData.email}</span>}
+              {formData.phone && <span>• {formData.phone}</span>}
+              {formData.location && <span>• {formData.location}</span>}
+            </div>
+            <div className="flex flex-wrap gap-4 text-sm">
+              {formData.linkedin && <span>LinkedIn: {formData.linkedin}</span>}
+              {formData.website && <span>• Portfolio: {formData.website}</span>}
+            </div>
           </div>
         </div>
 
@@ -58,7 +64,7 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ formData, template = "mod
 
         {/* Experience */}
         {formData.experience && formData.experience.length > 0 && (
-          <div className="px-8 pb-8">
+          <div className="px-8">
             <h2 className="text-xl font-semibold text-primary mb-4">Work Experience</h2>
             <div className="space-y-4">
               {formData.experience.map((exp: any, index: number) => (
@@ -71,6 +77,42 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ formData, template = "mod
                     <span className="text-sm text-gray-500">{exp.duration}</span>
                   </div>
                   <p className="mt-2 text-gray-700">{exp.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Education */}
+        {formData.education && formData.education.length > 0 && (
+          <div className="px-8">
+            <h2 className="text-xl font-semibold text-primary mb-4">Education</h2>
+            <div className="space-y-4">
+              {formData.education.map((edu: any, index: number) => (
+                <div key={index} className={styles.sectionClass}>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-semibold">{edu.degree}</h3>
+                      <p className="text-gray-600">{edu.institution}</p>
+                    </div>
+                    <span className="text-sm text-gray-500">{edu.year}</span>
+                  </div>
+                  {edu.gpa && <p className="mt-1 text-gray-600">GPA: {edu.gpa}</p>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Skills */}
+        {formData.skills && formData.skills.length > 0 && (
+          <div className="px-8 pb-8">
+            <h2 className="text-xl font-semibold text-primary mb-4">Skills</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {formData.skills.map((skill: any, index: number) => (
+                <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded">
+                  <span className="font-medium">{skill.name}</span>
+                  <span className="text-sm text-gray-500">{skill.level}</span>
                 </div>
               ))}
             </div>

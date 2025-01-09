@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ResumeForm from "@/components/ResumeForm";
 import ResumePreview from "@/components/ResumePreview";
 import { Button } from "@/components/ui/button";
-import { Download, Share2, Mail } from "lucide-react";
+import { Download, Share2, Mail, Github, Linkedin, Twitter } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import html2pdf from "html2pdf.js";
@@ -26,7 +26,7 @@ const Index = () => {
     const opt = {
       margin: 0.5,
       filename: 'MianCV-resume.pdf',
-      image: { type: 'jpeg', quality: 1 },
+      image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { 
         scale: 2,
         useCORS: true,
@@ -122,14 +122,42 @@ const Index = () => {
         </div>
       </main>
 
-      <footer className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-6 mt-8">
-        <div className="container text-center">
-          <p className="text-lg font-semibold">MianCV Builder</p>
-          <p className="text-sm mt-2">© 2025 All rights reserved.</p>
-          <div className="flex justify-center gap-4 mt-4">
-            <a href="#" className="hover:text-blue-200 transition-colors">Terms</a>
-            <a href="#" className="hover:text-blue-200 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-blue-200 transition-colors">Contact</a>
+      <footer className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-2xl font-bold">MultiMian</h3>
+              <p className="text-gray-300">
+                Creating professional resumes made easy. Stand out from the crowd with our modern templates.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-lg font-semibold">Quick Links</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Templates</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Features</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-lg font-semibold">Connect With Us</h4>
+              <div className="flex space-x-4">
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  <Twitter className="w-6 h-6" />
+                </a>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  <Linkedin className="w-6 h-6" />
+                </a>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  <Github className="w-6 h-6" />
+                </a>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  <Mail className="w-6 h-6" />
+                </a>
+              </div>
+              <p className="text-sm text-gray-300">© 2025 MultiMian. All rights reserved.</p>
+            </div>
           </div>
         </div>
       </footer>

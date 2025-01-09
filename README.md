@@ -1,69 +1,60 @@
-# Welcome to your Lovable project
+# MianCV Builder
 
-## Project info
+**MianCV Builder** is a modern resume creation tool designed to help users craft personalized, professional resumes quickly and efficiently. Built with **TypeScript** and **CSS**, this project focuses on delivering a sleek and user-friendly experience for job seekers.
 
-**URL**: https://lovable.dev/projects/03a7438c-c4e3-4604-b3d7-772273b68e4f
+## 🚀 Features
 
-## How can I edit this code?
+- Create professional, job-ready resumes with ease.
+- Multiple customizable templates.
+- Real-time previews for instant feedback.
+- PDF export functionality.
+- Section-wise editing for a personalized touch.
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+- **TypeScript**: Ensures robust, scalable, and type-safe code.
+- **CSS**: For styling and delivering a clean, modern UI.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/03a7438c-c4e3-4604-b3d7-772273b68e4f) and start prompting.
+## 💻 Installation
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Mianhassam96/MianCV-Builder.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd MianCV-Builder
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-**Use your preferred IDE**
+## 🎨 Customization
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Modify styles in the `styles` folder to create your unique look.
+- Add or edit components in the `components` folder to enhance functionality.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 📄 Usage
 
-Follow these steps:
+1. Open the app in your browser.
+2. Fill in the required sections.
+3. Customize your resume template.
+4. Export your resume as a PDF.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🤝 Contributing
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Contributions are welcome! Feel free to open issues or submit pull requests to improve the project.
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 📜 License
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+This project is licensed under the **MIT License**.
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+**Build. Polish. Impress.**
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/03a7438c-c4e3-4604-b3d7-772273b68e4f) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)

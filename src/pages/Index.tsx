@@ -2,35 +2,47 @@ import React, { useState } from "react";
 import ResumeForm from "@/components/ResumeForm";
 import ResumePreview from "@/components/ResumePreview";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Download, Share2, Mail } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import html2pdf from "html2pdf.js";
 
 const Index = () => {
   const [formData, setFormData] = useState({});
-  const [selectedTemplate, setSelectedTemplate] = useState("modern");
+  const [selectedTemplate, setSelectedTemplate] = useState<"modern" | "professional" | "creative">("modern");
   const { toast } = useToast();
 
   const handleExport = async () => {
     const element = document.getElementById('resume-preview');
-    if (!element) return;
+    if (!element) {
+      toast({
+        title: "Error",
+        description: "Preview element not found",
+        variant: "destructive",
+      });
+      return;
+    }
 
     const opt = {
-      margin: 1,
-      filename: 'resume.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
+      margin: 0.5,
+      filename: 'MianCV-resume.pdf',
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { 
+        scale: 2,
+        useCORS: true,
+        logging: true
+      },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
     try {
-      await html2pdf().set(opt).from(element).save();
+      await html2pdf().from(element).set(opt).save();
       toast({
         title: "Success!",
         description: "Your resume has been downloaded successfully.",
       });
     } catch (error) {
+      console.error('PDF generation error:', error);
       toast({
         title: "Error",
         description: "Failed to generate PDF. Please try again.",
@@ -39,18 +51,43 @@ const Index = () => {
     }
   };
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'My Resume',
+          text: 'Check out my resume created with MianCV Builder',
+          url: window.location.href
+        });
+        toast({
+          title: "Shared!",
+          description: "Your resume has been shared successfully.",
+        });
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Failed to share resume.",
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-primary text-white py-6">
+      <header className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-8">
         <div className="container">
-          <h1 className="text-3xl font-bold">Resume Builder</h1>
-          <p className="mt-2 text-gray-200">Create your professional resume in minutes</p>
+          <h1 className="text-4xl font-bold text-center">MianCV Builder</h1>
+          <p className="mt-2 text-gray-200 text-center">Create your professional resume in minutes</p>
         </div>
       </header>
 
       <main className="container py-8">
-        <div className="flex justify-between items-center mb-6">
-          <Select value={selectedTemplate} onValueChange={setSelectedTemplate}>
+        <div className="flex flex-wrap justify-between items-center mb-6 gap-4">
+          <Select 
+            value={selectedTemplate} 
+            onValueChange={(value: "modern" | "professional" | "creative") => setSelectedTemplate(value)}
+          >
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="Select template" />
             </SelectTrigger>
@@ -60,10 +97,17 @@ const Index = () => {
               <SelectItem value="creative">Creative Template</SelectItem>
             </SelectContent>
           </Select>
-          <Button onClick={handleExport} className="flex items-center gap-2">
-            <Download className="w-4 h-4" />
-            Export PDF
-          </Button>
+          
+          <div className="flex gap-4">
+            <Button onClick={handleShare} variant="outline" className="flex items-center gap-2">
+              <Share2 className="w-4 h-4" />
+              Share
+            </Button>
+            <Button onClick={handleExport} className="flex items-center gap-2">
+              <Download className="w-4 h-4" />
+              Export PDF
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -78,9 +122,15 @@ const Index = () => {
         </div>
       </main>
 
-      <footer className="bg-primary text-white py-4 mt-8">
+      <footer className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-6 mt-8">
         <div className="container text-center">
-          <p>© 2024 MultiMian Resume Builder. All rights reserved.</p>
+          <p className="text-lg font-semibold">MianCV Builder</p>
+          <p className="text-sm mt-2">© 2025 All rights reserved.</p>
+          <div className="flex justify-center gap-4 mt-4">
+            <a href="#" className="hover:text-blue-200 transition-colors">Terms</a>
+            <a href="#" className="hover:text-blue-200 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-blue-200 transition-colors">Contact</a>
+          </div>
         </div>
       </footer>
     </div>

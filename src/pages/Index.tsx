@@ -4,16 +4,39 @@ import ResumePreview from "@/components/ResumePreview";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import html2pdf from "html2pdf.js";
 
 const Index = () => {
   const [formData, setFormData] = useState({});
+  const [selectedTemplate, setSelectedTemplate] = useState("modern");
   const { toast } = useToast();
 
-  const handleExport = () => {
-    toast({
-      title: "Coming Soon!",
-      description: "PDF export functionality will be available in the next update.",
-    });
+  const handleExport = async () => {
+    const element = document.getElementById('resume-preview');
+    if (!element) return;
+
+    const opt = {
+      margin: 1,
+      filename: 'resume.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    try {
+      await html2pdf().set(opt).from(element).save();
+      toast({
+        title: "Success!",
+        description: "Your resume has been downloaded successfully.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to generate PDF. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -26,7 +49,17 @@ const Index = () => {
       </header>
 
       <main className="container py-8">
-        <div className="flex justify-end mb-6">
+        <div className="flex justify-between items-center mb-6">
+          <Select value={selectedTemplate} onValueChange={setSelectedTemplate}>
+            <SelectTrigger className="w-[200px]">
+              <SelectValue placeholder="Select template" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="modern">Modern Template</SelectItem>
+              <SelectItem value="professional">Professional Template</SelectItem>
+              <SelectItem value="creative">Creative Template</SelectItem>
+            </SelectContent>
+          </Select>
           <Button onClick={handleExport} className="flex items-center gap-2">
             <Download className="w-4 h-4" />
             Export PDF
@@ -38,10 +71,18 @@ const Index = () => {
             <ResumeForm formData={formData} setFormData={setFormData} />
           </div>
           <div className="lg:sticky lg:top-8 h-fit">
-            <ResumePreview formData={formData} />
+            <div id="resume-preview">
+              <ResumePreview formData={formData} template={selectedTemplate} />
+            </div>
           </div>
         </div>
       </main>
+
+      <footer className="bg-primary text-white py-4 mt-8">
+        <div className="container text-center">
+          <p>© 2024 MultiMian Resume Builder. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };

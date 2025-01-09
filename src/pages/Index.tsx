@@ -24,23 +24,32 @@ const Index = () => {
     }
 
     const opt = {
-      margin: 0.5,
+      margin: [0.5, 0.5],
       filename: 'MianCV-resume.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
+      image: { type: 'jpeg', quality: 1 },
       html2canvas: { 
         scale: 2,
         useCORS: true,
-        logging: true
+        logging: true,
+        letterRendering: true,
+        windowWidth: 1200
       },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      jsPDF: { 
+        unit: 'in', 
+        format: 'letter', 
+        orientation: 'portrait',
+        compress: true,
+        quality: 100
+      }
     };
 
     try {
-      await html2pdf().from(element).set(opt).save();
+      const pdf = await html2pdf().set(opt).from(element).save();
       toast({
         title: "Success!",
         description: "Your resume has been downloaded successfully.",
       });
+      return pdf;
     } catch (error) {
       console.error('PDF generation error:', error);
       toast({

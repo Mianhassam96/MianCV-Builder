@@ -152,16 +152,14 @@ const Index = () => {
             <div className="space-y-4">
               <h4 className="text-lg font-semibold">Connect With Us</h4>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  <Twitter className="w-6 h-6" />
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              
+                <a href="https://www.linkedin.com/in/mianhassam96/" className="text-gray-300 hover:text-white transition-colors">
                   <Linkedin className="w-6 h-6" />
                 </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <a href="https://github.com/Mianhassam96" className="text-gray-300 hover:text-white transition-colors">
                   <Github className="w-6 h-6" />
                 </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <a href="mhassamkb@gmail.com" className="text-gray-300 hover:text-white transition-colors">
                   <Mail className="w-6 h-6" />
                 </a>
               </div>
